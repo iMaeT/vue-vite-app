@@ -1,0 +1,35 @@
+// https://www.tslang.cn/docs/handbook/tsconfig-json.html
+{
+  // https://www.tslang.cn/docs/handbook/compiler-options.html
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "baseUrl": ".",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true, // 禁止对同一个文件的不一致的引用
+    "allowSyntheticDefaultImports": true,
+    "strictFunctionTypes": false,
+    "noUnusedLocals": true, // 若有未使用的局部变量则抛错。
+    "noUnusedParameters": true, // 若有未使用的参数则抛错。
+    "experimentalDecorators": true, // 启用实验性的ES装饰器。
+    "noImplicitAny": false, // 在表达式和声明上有隐含的 any类型时报错
+    "skipLibCheck": true, // 忽略所有的声明文件（ *.d.ts）的类型检查
+    "paths": {
+      // 模块名到基于 baseUrl 的路径映射的列表。
+      "@/*": ["src/*"],
+      "_v/*": ["src/views/*"],
+      "_c/*": ["src/components/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "components.d.ts"],
+  "typeRoots": ["./node_modules/@types/", "./types"],
+  "exclude": ["node_modules", "dist", "**/*.js"]
+}
