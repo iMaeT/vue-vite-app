@@ -1,0 +1,62 @@
+/* stylelint-disable property-no-unknown */
+:root {
+  // base color
+  --blue: #324157;
+  --light-blue: #3a71a8;
+  --red: #c03639;
+  --pink: #e65d6e;
+  --green: #30b08f;
+  --tiffany: #4ab7bd;
+  --yellow: #fec171;
+  --panGreen: #30b08f;
+
+  // sidebar
+  --menu-text-color: #bfcbd9;
+  --menu-active-text-color: #fff;
+  --menu-active-background-color: #2d8cf0;
+  --menu-background-color: #001529;
+  --sub-menu-background-color: #1f2d3d;
+  --sub-menu-hover-color: #2d8cf0;
+  --sub-menu-active-text-color: #fff;
+  --menu-width: 210px;
+  --menu-min-width: 64px;
+
+  // navbar
+  --navbar-height: 40px;
+
+  // tagsView
+  --tags-view-height: 40px;
+  --tag-background-color: #fbfbfb;
+  --tag-active-background-color: #fff;
+
+  // content
+  --content-background-color: #fff;
+  --app-background-color: #f5f7f9;
+
+  // html body
+  --content-min-width: 992px;
+}
+
+// sidebar
+@menuText: #bfcbd9;
+@menuActiveText: #409eff;
+@subMenuActiveText: #f4f4f5; // https://github.com/ElemeFE/element/issues/12951
+
+@menuBg: #304156;
+@menuHover: #263445;
+
+@subMenuBg: #1f2d3d;
+@subMenuHover: #001528;
+
+@sideBarWidth: 210px;
+
+:export {
+  menuText: @menuText;
+  menuActiveText: @menuActiveText;
+  subMenuActiveText: @subMenuActiveText;
+  menuBg: @menuBg;
+  menuHover: @menuHover;
+  subMenuBg: @subMenuBg;
+  subMenuHover: @subMenuHover;
+  sideBarWidth: @sideBarWidth;
+}

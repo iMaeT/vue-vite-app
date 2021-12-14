@@ -45,7 +45,7 @@ npm run lint
 
 在一个团队中，每个人的`git`的`commit`信息都不一样，五花八门，没有一个机制很难保证规范化，如何才能规范化呢？可能你想到的是`git`的`hook`机制，去写`shell`脚本去实现。这当然可以，其实`JavaScript`有一个很好的工具可以实现这个模板，它就是`commitlint`（用于校验 git 提交信息规范）。
 
-### 配置项
+### 配置项1
 
 commit-lint 的配置位于项目根目录下`commitlint.config.js`
 
@@ -145,3 +145,7 @@ git commit -m "Keep calm and commit"
 最佳的 `lint` 规范流程就是推荐团队成员先在自己的编辑器中配置 `eslint`，这样平时写的时候编辑器就能帮你修正一些简单的格式错误，同时提醒你有哪些不符合 `lint` 规范的的地方，并在命令行中提示你错误。。
 
 但这并不是强制的，有些团队成员或者说刚来的实习生没有在编辑器中配置或者无视命令行中提示的错误，这时候就需要配置`pre-commit` 这种强制性校验的东西，保证所有提交到远程仓库的内容都是符合团队规范的。
+
+### 全局安装 terser
+
+[terser](https://www.npmjs.com/package/terser)

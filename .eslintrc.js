@@ -75,8 +75,7 @@ module.exports = defineConfig({
       {
         singleline: 10,
         multiline: {
-          max: 1,
-          allowFirstLine: false
+          max: 1
         }
       }
     ],

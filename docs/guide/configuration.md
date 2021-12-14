@@ -2,7 +2,7 @@
 
 ## 环境变量配置
 
-在项目中，难免会碰到需要在不同环境下做不同的事，这时候，就需要自己去配置环境变量。目前`vue-element-plus-admin`提供了四种环境变量。除了`.env.base`是针对开发的时候，其他三种环境变量是针对打包的时候去构建不同环境的。目前主要的一个区别就是为了区分出接口前缀。
+在项目中，难免会碰到需要在不同环境下做不同的事，这时候，就需要自己去配置环境变量。目前`vue-element-plus-admin`提供了四种环境变量。除了`.env.dev`是针对开发的时候，其他三种环境变量是针对打包的时候去构建不同环境的。目前主要的一个区别就是为了区分出接口前缀。
 
 开发人员可以根据实际项目情况去进行扩展改造。
 
@@ -12,15 +12,15 @@
 获取全局环境变量：import.meta.env
 :::
 
-<!-- ### .env.base
+<!-- ### .env.dev
 
-当运行`npm run dev`的时候，默认取的是`.env.base`中的环境变量以及参数。
+当运行`npm run dev`的时候，默认取的是`.env.dev`中的环境变量以及参数。
 
 ```javascript
 // 环境
 NODE_ENV=development
 // 接口环境
-VITE_API_BASEPATH='base'
+VITE_API_BASEPATH='dev'
 ``` -->
 
 ### .env.dev
@@ -70,9 +70,7 @@ VITE_API_BASEPATH='pro'
 
 ```css
 :root {
-  --main-color: #018ffb; // 主颜色
-
-  // Silder
+  // Sider
   --menu-text-color: #bfcbd9; // 左侧菜单字体颜色
   --menu-active-text-color: #fff; // 左侧菜单选中字体颜色
   --menu-active-background-color: #2d8cf0; // 左侧菜单选中背景颜色
@@ -125,7 +123,7 @@ VITE_API_BASEPATH='pro'
 }
 ```
 
-## 项目配置
+## 项目配置明细
 
 ::: tip 提示
 项目配置用于配置项目内展示的内容/布局/文本等效果，存于 `pinia` 中。

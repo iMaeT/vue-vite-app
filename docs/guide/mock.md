@@ -184,10 +184,10 @@ const config: {
    */
   base_url: {
     // 开发环境接口前缀
-    base: 'http://mockjs.test.cn',
+    dev: 'http://mockjs.test.cn',
 
     // 打包开发环境接口前缀
-    dev: 'http://mockjs.test.cn',
+    devpro: 'http://mockjs.test.cn',
 
     // 打包生产环境接口前缀
     pro: 'http://mockjs.test.cn',
@@ -204,7 +204,7 @@ const config: {
   /**
    * 接口请求超时时间
    */
-  request_timeout: 60000,
+  request_timeout: 20000,
 
   /**
    * 默认接口请求类型
@@ -283,7 +283,7 @@ import config from './config'
 
 const { result_code, base_url } = config
 
-export const PATH_URL = base_url[import.meta.env.VITE_API_BASEPATH as string]
+export const PATH_URL = base_url[import.meta.env.MODE as string]
 
 // 创建axios实例
 const service: AxiosInstance = axios.create({

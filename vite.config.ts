@@ -1,8 +1,9 @@
-import type { UserConfig } from 'vite'
+import { UserConfig, ConfigEnv, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import eslintPlugin from 'vite-plugin-eslint'
 import ElementPlus from 'unplugin-element-plus/vite'
@@ -16,10 +17,21 @@ function pathResolve(dir: string) {
 }
 
 // https://vitejs.dev/config/
-export default (): UserConfig => {
+export default ({ command, mode }: ConfigEnv): UserConfig => {
+  let env = null
+  if (command === 'serve') {
+    env = loadEnv(process.argv[3], root)
+  } else {
+    env = loadEnv(mode, root)
+  }
+  const proxyPath: string = env.VITE_API_BASEPATH
+  // 转为正则表达式
+  const regExpPath = new RegExp(`^${proxyPath}`)
   return {
+    base: env.VITE_BASE_PATH,
     plugins: [
       vue(),
+      vueJsx(),
       vueSetupExtend(),
       ElementPlus({
         useSource: true
@@ -47,9 +59,15 @@ export default (): UserConfig => {
       })
     ],
     css: {
+      // css 模块化
+      modules: {
+        generateScopedName: '[name]__[local]__[hash:base64:5]',
+        hashPrefix: 'prefix'
+      },
+      // 预编译支持 less
       preprocessorOptions: {
         less: {
-          // additionalData: '@import "./src/styles/variables.less";',
+          additionalData: '@import "./src/styles/variables.less";',
           javascriptEnabled: true
         }
       }
@@ -70,24 +88,41 @@ export default (): UserConfig => {
         }
       ]
     },
-    build: {
-      sourcemap: false
-    },
+    // build: {
+    //   minify: 'terser',
+    //   outDir: env.VITE_OUT_DIR,
+    //   sourcemap: env.VITE_SOURCEMAP === 'true' ? 'inline' : false,
+    //   brotliSize: false,
+    //   terserOptions: {
+    //     compress: {
+    //       drop_debugger: env.VITE_DROP_DEBUGGER === 'true',
+    //       drop_console: env.VITE_DROP_CONSOLE === 'true'
+    //     }
+    //   }
+    // },
     server: {
       proxy: {
-        // 字符串简写写法
-        '/foo': 'http://localhost:4567/foo',
-        // 选项写法
-        '/api': {
-          target: 'http://jsonplaceholder.typicode.com',
+        // // 字符串简写写法
+        // '/foo': 'http://localhost:4567/foo',
+        // // 选项写法
+        // '/api': {
+        //   target: 'http://jsonplaceholder.typicode.com',
+        //   changeOrigin: true,
+        //   rewrite: (path) => path.replace(/^\/api/, '')
+        // },
+        // // 正则表达式写法
+        // '^/fallback/.*': {
+        //   target: 'http://jsonplaceholder.typicode.com',
+        //   changeOrigin: true,
+        //   rewrite: (path) => path.replace(/^\/fallback/, '')
+        // }
+
+        [proxyPath]: {
+          target: 'http://172.16.10.182:9000',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
-        },
-        // 正则表达式写法
-        '^/fallback/.*': {
-          target: 'http://jsonplaceholder.typicode.com',
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/fallback/, '')
+          rewrite: (path) => {
+            return path.replace(regExpPath, '')
+          }
         }
       }
     },

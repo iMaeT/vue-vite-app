@@ -29,7 +29,16 @@
       "_c/*": ["src/components/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "components.d.ts"],
+  "include": [
+    "@types/**/*.d.ts",
+    "@types/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "components.d.ts"
+  ],
+  "types": ["element-plus/global", "vite/client"],
   "typeRoots": ["./node_modules/@types/", "./types"],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }
