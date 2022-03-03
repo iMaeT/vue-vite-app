@@ -41,6 +41,7 @@ router.beforeEach(async (to, from, next) => {
           // 动态添加可访问路由表
           await router.addRoute(route as RouteRecordRaw)
         })
+
         const redirectPath = from.query.redirect || to.path
         const redirect = decodeURIComponent(redirectPath as string)
         // hack方法，以确保 addRoutes 是完整的

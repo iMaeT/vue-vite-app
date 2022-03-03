@@ -96,18 +96,48 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     name: 'ComponentsDemo',
     meta: {
       title: '功能组件',
-      icon: 'component',
       alwaysShow: true
     },
     roles: [],
     children: [
       {
-        path: 'echarts',
+        path: 'echarts1',
+        component: () => import('_v/components-demo/echarts/index.vue'),
+        name: 'EchartsDemo1',
+        meta: {
+          icon: 'component',
+          title: '图表1'
+        }
+      },
+      {
+        path: 'echarts2',
         component: () => import('_v/components-demo/echarts/index.vue'),
         name: 'EchartsDemo',
         meta: {
-          title: '图表'
-        }
+          icon: 'component',
+          title: '图表2'
+        },
+        redirect: 'index1',
+        children: [
+          {
+            path: 'index1',
+            component: () => import('_v/guide/index.vue'),
+            name: 'GuideDemo1',
+            meta: {
+              title: '引导页1',
+              icon: 'guide'
+            }
+          },
+          {
+            path: 'index2',
+            component: () => import('_v/guide/index.vue'),
+            name: 'GuideDemo2',
+            meta: {
+              title: '引导页2',
+              icon: 'guide'
+            }
+          }
+        ]
       }
     ]
   }

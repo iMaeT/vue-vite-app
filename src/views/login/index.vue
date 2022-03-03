@@ -1,14 +1,18 @@
 <script lang="tsx">
-import { defineComponent, ref, reactive, unref } from 'vue'
-import type { LoginFormModule } from '@/@types'
+import { defineComponent, ref, reactive, unref, watch } from 'vue'
 import { useUserStoreExternal } from '@/store/modules/user'
+import { useRouter } from 'vue-router'
+import type { RouteLocationNormalizedLoaded } from 'vue-router'
+import type { LoginFormModule } from '@/@types'
 
 export default defineComponent({
   name: 'Login',
   setup() {
     const userStore = useUserStoreExternal()
+    const { currentRoute, push } = useRouter()
     const refForm = ref<Nullable<Element>>(null)
-    const loading = ref<Boolean>(false)
+    const loading = ref<boolean>(false)
+    const redirect = ref<string>('')
     const form = reactive<LoginFormModule>({
       username: '',
       password: ''
@@ -18,12 +22,32 @@ export default defineComponent({
       password: [{ required: true, message: '请输入密码' }]
     })
 
+    watch(
+      () => currentRoute.value,
+      (route: RouteLocationNormalizedLoaded) => {
+        redirect.value = route?.query?.redirect as string
+      },
+      {
+        immediate: true
+      }
+    )
+
     const login = (): void => {
       const formWrap = unref(refForm) as any
       if (!formWrap) return
       formWrap.validate((valid: boolean) => {
         if (valid) {
-          userStore.login(form)
+          loading.value = true
+
+          userStore
+            .login(form)
+            .then(() => {
+              push({ path: redirect.value || '/' })
+              loading.value = false
+            })
+            .catch(() => {
+              loading.value = false
+            })
         }
       })
     }

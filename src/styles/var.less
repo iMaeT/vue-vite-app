@@ -1,6 +1,5 @@
 /* stylelint-disable property-no-unknown */
 :root {
-  // base color
   --blue: #324157;
   --light-blue: #3a71a8;
   --red: #c03639;
@@ -11,6 +10,7 @@
   --panGreen: #30b08f;
 
   // sidebar
+  --logo-side-height: 60px;
   --menu-text-color: #bfcbd9;
   --menu-active-text-color: #fff;
   --menu-active-background-color: #2d8cf0;
@@ -35,28 +35,4 @@
 
   // html body
   --content-min-width: 992px;
-}
-
-// sidebar
-@menuText: #bfcbd9;
-@menuActiveText: #409eff;
-@subMenuActiveText: #f4f4f5; // https://github.com/ElemeFE/element/issues/12951
-
-@menuBg: #304156;
-@menuHover: #263445;
-
-@subMenuBg: #1f2d3d;
-@subMenuHover: #001528;
-
-@sideBarWidth: 210px;
-
-:export {
-  menuText: @menuText;
-  menuActiveText: @menuActiveText;
-  subMenuActiveText: @subMenuActiveText;
-  menuBg: @menuBg;
-  menuHover: @menuHover;
-  subMenuBg: @subMenuBg;
-  subMenuHover: @subMenuHover;
-  sideBarWidth: @sideBarWidth;
 }

@@ -17,10 +17,10 @@ export const usePermissionStore = defineStore({
     addRoutes: []
   }),
   getters: {
-    getRouters(): AppRouteRecordRaw[] {
+    getPermissionRoutes(): AppRouteRecordRaw[] {
       return this.routes
     },
-    getAddRouters(): AppRouteRecordRaw[] {
+    getAddRoutes(): AppRouteRecordRaw[] {
       return this.addRoutes
     }
   },
